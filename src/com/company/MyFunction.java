@@ -211,31 +211,31 @@ public class MyFunction {
                 sum = n1 * n2;
                 break;
             case '/':
-                if (n2 == 0)
-                {
-                    System.out.println("Error 5: Division by zero!");
-                }else sum = n1 / n2;
+                if (n2 != 0)
+                    sum = n1 / n2;
         }
-
-            System.out.print(numb1);
-            System.out.print(operant);
-            System.out.print(numb2);
-            System.out.print('=');
-            if (flag)
-                System.out.println(sum);
-            else
-                try {
-                    System.out.println(RomanNumb.IntToRomNub(sum));
-                }catch (ArrayIndexOutOfBoundsException exc)
-                {
-                    System.out.println("Warning! the result of the operation is too long, the classical result is displayed:");
-                    System.out.print(numb1);
-                    System.out.print(operant);
-                    System.out.print(numb2);
-                    System.out.print('=');
+            if (operant == '/' && n2 == 0)
+                System.out.println("Error 5: Division by zero!");
+            else{
+                System.out.print(numb1);
+                System.out.print(operant);
+                System.out.print(numb2);
+                System.out.print('=');
+                if (flag)
                     System.out.println(sum);
-                }
-            if (sum >= 1147483648 || sum <= -1147483648 || n1 >= 1147483648 || n2 >= 1147483648 || n1 <= -1147483648 || n2 <= -1147483648)
-                System.out.print("Warning: Type overflow possible!\nThe decision may be incorrect.");
+                else
+                    try {
+                        System.out.println(RomanNumb.IntToRomNub(sum));
+                    } catch (ArrayIndexOutOfBoundsException exc) {
+                        System.out.println("Warning! the result of the operation is too long, the classical result is displayed:");
+                        System.out.print(numb1);
+                        System.out.print(operant);
+                        System.out.print(numb2);
+                        System.out.print('=');
+                        System.out.println(sum);
+                    }
+                if (sum >= 1147483648 || sum <= -1147483648 || n1 >= 1147483648 || n2 >= 1147483648 || n1 <= -1147483648 || n2 <= -1147483648)
+                    System.out.print("Warning: Type overflow possible!\nThe decision may be incorrect.");
+            }
     }
 }

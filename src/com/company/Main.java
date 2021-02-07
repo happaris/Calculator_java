@@ -11,21 +11,12 @@ public class Main {
         System.out.println("Type an expression:");
         str = scan.nextLine();
         array = str.toCharArray();
-        switch (MyFunction.valid(array)){
-            case 0:
-                System.out.println("Error 0:  Incorrect expression!");
-                break;
-            case 1:
-                System.out.println("Error 1:  Check the signs!");
-                break;
-            case 2:
-                System.out.println("Error 2:  Invalid values!");
-                break;
-            case 3:
-                System.out.println("Error 3:  Empty Expression!");
-                break;
-            case 4:
-                MyFunction.calculate(array);
+        switch (MyFunction.valid(array)) {
+            case 0 -> System.out.println("Error 0:  Incorrect expression!");
+            case 1 -> System.out.println("Error 1:  Check the signs!");
+            case 2 -> System.out.println("Error 2:  Invalid values!");
+            case 3 -> System.out.println("Error 3:  Empty Expression!");
+            case 4 -> MyFunction.calculate(array);
         }
     }
 }

@@ -1,19 +1,19 @@
 package com.company;
 
 public class MyFunction {
-    private static boolean operate(char ch) //Проверям является ли символ оператором
+    public static boolean operate(char ch) //Проверям является ли символ оператором
     {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';
     }
-    private static boolean RomNumb(char ch) //Проверям является ли символ римской цифрой
+    public static boolean RomNumb(char ch) //Проверям является ли символ римской цифрой
     {
         return ch == 'I' || ch == 'V' || ch == 'X' || ch == 'L' || ch == 'C' || ch == 'D' || ch == 'M' || ch == 'N';
     }
-    private static boolean ArabNumb(char ch) //Проверям является ли символ арабской цифрой
+    public static boolean ArabNumb(char ch) //Проверям является ли символ арабской цифрой
     {
         return ch >= '0' && ch <= '9';
     }
-    private static int CharArrToInt(char[] arr) //Преобразуем массив чаров в интовое значение
+    public static int CharArrToInt(char[] arr) //Преобразуем массив чаров в интовое значение
     {
         int sum;
         int flag;
@@ -25,8 +25,9 @@ public class MyFunction {
         {
             flag = -1;
             i++;
-        }
-            else flag = 1;
+        } else flag = 1;
+        if (arr[i] == '+')
+            i++;
         while (ArabNumb(arr[i]))
         {
             sum = sum * 10 + (arr[i] - '0');
@@ -34,210 +35,7 @@ public class MyFunction {
         }
         return sum * flag;
     }
-    private static int RomNubToInt(char[] str) //Преобразуем римское число в массиве в целое число
-    {
-        int i;
-        int sum;
-        int flag;
 
-        flag = 1;
-        i = 0;
-        sum = 0;
-        if (str[i] == '-')
-            flag = -1;
-        if (str[i] == 'N')
-            return sum;
-        while (str[i] != '\0')
-        {
-            if (str[i] == 'M')
-                sum += 1000;
-            if (str[i] == 'D')
-                sum += 500;
-            if (str[i] == 'C')
-            {
-                if (str[i + 1] == 'M')
-                {
-                    sum += 900;
-                    i++;
-                }else
-                if (str[i + 1] == 'D')
-                {
-                    sum += 400;
-                    i++;
-                }else
-                    sum += 100;
-            }
-            if (str[i] == 'L')
-                sum += 50;
-            if (str[i] == 'X')
-            {
-                if (str[i + 1] == 'C')
-                {
-                    sum += 90;
-                    i++;
-                }else
-                if (str[i + 1] == 'L')
-                {
-                    sum += 40;
-                    i++;
-                }else
-                    sum += 10;
-            }
-            if (str[i] == 'V')
-            {
-                if (str[i + 1] == 'I' && str[i + 2] != 'I')
-                {
-                    sum += 6;
-                    i += 2;
-                }else
-                if (str[i + 1] == 'I' && str[i + 2] == 'I' && str[i + 3] != 'I')
-                {
-                    sum += 7;
-                    i += 3;
-                }else
-                if (str[i + 1] == 'I' && str[i + 2] == 'I' && str[i + 3] == 'I')
-                {
-                    sum += 8;
-                    i += 4;
-                }else
-                    sum += 5;
-            }
-            if (str[i] == 'I')
-            {
-                if (str[i + 1] == 'I' && str[i + 2] == '\0')
-                {
-                    sum += 2;
-                    i += 2;
-                }else
-                if (str[i + 1] == 'I' && str[i + 2] == 'I')
-                {
-                    sum += 3;
-                    i += 3;
-                }else
-                if (str[i + 1] == 'X')
-                {
-                    sum += 9;
-                    i += 2;
-                }else
-                if (str[i + 1] == 'V')
-                {
-                    sum += 4;
-                    i += 2;
-                }else
-                    sum += 1;
-            }
-            i++;
-        }
-        return sum * flag;
-    }
-    private static char[] IntToRomNub(int numb)  // Преобразуем целое число в римское
-    {
-        char[] sum= new char[10];
-        int i;
-        int k;
-
-        i = 0;
-        if (numb == 0) {
-            sum[i] = 'N';
-            return (sum);
-        }
-        if (numb < 0)
-        {
-            sum[i] = '-';
-            numb *= -1;
-            i++;
-        }
-        k = numb / 1000;
-        while (k != 0) {
-            sum[i] = 'M';
-            k--;
-            i++;
-        }
-        numb %= 1000;
-        k = numb / 100;
-        if (k == 9) {
-            sum[i++] = 'C';
-            sum[i++] = 'M';
-            k -= 9;
-        }
-        if (k >= 5) {
-            sum[i++] = 'D';
-            k -= 5;
-        }
-        if (k == 4) {
-            sum[i++] = 'C';
-            sum[i++] = 'D';
-            k -= 4;
-        }
-        while (k != 0) {
-            sum[i] = 'C';
-            k--;
-            i++;
-        }
-        numb %= 100;
-        k = numb / 10;
-        if (k == 9) {
-            sum[i++] = 'X';
-            sum[i++] = 'C';
-            k -= 9;
-            numb -= 90;
-        }
-        if (k >= 5) {
-            sum[i++] = 'L';
-            k -= 5;
-        }
-        if (k == 4) {
-            sum[i++] = 'X';
-            sum[i++] = 'L';
-            k -= 4;
-        }
-        while (k != 0) {
-            sum[i] = 'X';
-            k--;
-            i++;
-        }
-        numb %= 10;
-        if (numb == 1) {
-            sum[i++] = 'I';
-        }
-        if (numb == 2) {
-            sum[i++] = 'I';
-            sum[i++] = 'I';
-        }
-        if (numb == 3) {
-            sum[i++] = 'I';
-            sum[i++] = 'I';
-            sum[i++] = 'I';
-        }
-        if (numb == 4) {
-            sum[i++] = 'I';
-            sum[i++] = 'V';
-        }
-        if (numb == 5) {
-            sum[i++] = 'V';
-        }
-        if (numb == 6) {
-            sum[i++] = 'V';
-            sum[i++] = 'I';
-        }
-        if (numb == 7) {
-            sum[i++] = 'V';
-            sum[i++] = 'I';
-            sum[i++] = 'I';
-        }
-        if (numb == 8) {
-            sum[i++] = 'V';
-            sum[i++] = 'I';
-            sum[i++] = 'I';
-            sum[i++] = 'I';
-        }
-        if (numb == 9) {
-            sum[i++] = 'I';
-            sum[i++] = 'X';
-        }
-        sum[i] = '\0';
-        return sum;
-    }
 
     public static int valid(char[] arr) //Проверяем корректной введеного выражения
     {
@@ -258,6 +56,12 @@ public class MyFunction {
         {
             if (ArabNumb(arr[i]) || RomNumb(arr[i]) || operate(arr[i]) || arr[i] == ' ')
             {
+                if (arr[i] == '+' && !flagonemin)
+                    if (ArabNumb(arr[i + 1]) || RomNumb(arr[i + 1]))
+                        i++;
+                    else if (operate(arr[i + 1]))
+                        return 1;
+                    else return 0;
                 if (arr[i] == '-' && numb1 == 0 && !flagonemin)
                 {
                     if (ArabNumb(arr[i + 1]) || RomNumb(arr[i + 1])) {
@@ -270,25 +74,21 @@ public class MyFunction {
                     if (ArabNumb(arr[i]) && numb1 == 0)
                     {
                         numb1 = 1;
-                        while (ArabNumb(arr[i]))
-                            i++;
-                        if (arr[i] != ' ' && !operate(arr[i]))
-                            return 0;
+                        while (ArabNumb(arr[i]) && i != arr.length - 1)
+                                i++;
                         while (arr[i] == ' ')
                             i++;
-                        if (!operate(arr[i]))
+                        if (arr[i] != ' ' && !operate(arr[i]))
                             return 0;
                     }
                     if (RomNumb(arr[i]) && numb1 == 0)
                     {
                         numb1 = 2;
-                        while (RomNumb(arr[i]))
+                        while (RomNumb(arr[i]) && i != arr.length - 1)
                             i++;
-                        if (arr[i] != ' ' && !operate(arr[i]))
-                            return 0;
                         while (arr[i] == ' ')
                             i++;
-                        if (!operate(arr[i]))
+                        if (arr[i] != ' ' && !operate(arr[i]))
                             return 0;
                     }
                     if (operate(arr[i]))
@@ -306,7 +106,7 @@ public class MyFunction {
                                 i++;
                             while (arr[i] == ' ' && i < arr.length - 1)
                                 i++;
-                            if (arr.length - 1 > i || (arr[i - 1] == ' ' && ArabNumb(arr[i])))
+                            if (arr.length - 1 > i || (arr[i - 1] == ' ' && ArabNumb(arr[i - 1])))
                                 return 0;
                         }
                         if (RomNumb(arr[i]))
@@ -316,7 +116,7 @@ public class MyFunction {
                                 i++;
                             while (arr[i] == ' ' && i < arr.length - 1)
                                 i++;
-                            if (arr.length - 1 > i || (arr[i - 1] == ' ' && RomNumb(arr[i])))
+                            if (arr.length - 1 > i || (arr[i - 1] == ' ' && RomNumb(arr[i - 1])))
                                 return 0;
                         }
                     }
@@ -326,14 +126,18 @@ public class MyFunction {
         }
         if (numb1 != numb2)
             return 2;
+        if (operate(arr[i - 1]))
+            return 1;
+        else if (arr[i - 1] != ' ' && !ArabNumb(arr[i - 1]) && !RomNumb(arr[i - 1]))
+            return 0;
         return 4;
     }
     public static void calculate(char[] arr){
         int i;
         int j;
         int k;
-        char[] numb1 = new char[arr.length];
-        char[] numb2 = new char[arr.length];
+        char[] numb1 = new char[arr.length * 2];
+        char[] numb2 = new char[arr.length * 2];
         char operant;
 
         i = 0;
@@ -347,6 +151,8 @@ public class MyFunction {
         while (i < arr.length)
         {
             if (arr[i] == ' ' && i != arr.length - 1)
+                i++;
+            if (arr[i] == '+' && j == 0)
                 i++;
             if (arr[i] == '-' && j == 0)
             {
@@ -389,8 +195,8 @@ public class MyFunction {
             flag = true;
         }else
         {
-            n1 = RomNubToInt(numb1);
-            n2 = RomNubToInt(numb2);
+            n1 = RomanNumb.RomNubToInt(numb1);
+            n2 = RomanNumb.RomNubToInt(numb2);
             flag = false;
         }
         switch (operant)
@@ -411,17 +217,25 @@ public class MyFunction {
                 }else sum = n1 / n2;
         }
 
-        //if (n1 <= 10 && n2 <= 10 && n1 >= 1 && n2 >= 1)
-        //{
             System.out.print(numb1);
             System.out.print(operant);
             System.out.print(numb2);
             System.out.print('=');
             if (flag)
-                System.out.print(sum);
+                System.out.println(sum);
             else
-                System.out.print(IntToRomNub(sum));
-        //}else
-         //   System.out.println("Error 4: Invalid values!");
+                try {
+                    System.out.println(RomanNumb.IntToRomNub(sum));
+                }catch (ArrayIndexOutOfBoundsException exc)
+                {
+                    System.out.println("Warning! the result of the operation is too long, the classical result is displayed:");
+                    System.out.print(numb1);
+                    System.out.print(operant);
+                    System.out.print(numb2);
+                    System.out.print('=');
+                    System.out.println(sum);
+                }
+            if (sum >= 1147483648 || sum <= -1147483648 || n1 >= 1147483648 || n2 >= 1147483648 || n1 <= -1147483648 || n2 <= -1147483648)
+                System.out.print("Warning: Type overflow possible!\nThe decision may be incorrect.");
     }
 }

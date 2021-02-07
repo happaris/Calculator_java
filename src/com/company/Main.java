@@ -16,7 +16,7 @@ public class Main {
                 System.out.println("Error 0:  Incorrect expression!");
                 break;
             case 1:
-                System.out.println("Error 1:  Check the signs!");
+                System.out.println("Error 1:  Check the siegns!");
                 break;
             case 2:
                 System.out.println("Error 2:  Invalid values!");

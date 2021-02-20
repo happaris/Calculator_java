@@ -226,7 +226,7 @@ public class MyFunction {
                 else
                     try {
                         System.out.println(RomanNumb.IntToRomNub(sum));
-                    } catch (ArrayIndexOutOfBoundsException exc) {
+                    }catch (ArrayIndexOutOfBoundsException exc) {
                         System.out.println("Warning! the result of the operation is too long, the classical result is displayed:");
                         System.out.print(numb1);
                         System.out.print(operant);

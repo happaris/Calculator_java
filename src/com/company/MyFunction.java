@@ -173,7 +173,15 @@ public class MyFunction {
                 operant = arr[i];
             i++;
         }
-        result(numb1, numb2, operant);
+        if (RomNumb(numb1[0]))
+        {
+            if (RomanNumb.valid(numb1) && RomanNumb.valid(numb2))
+                result(numb1, numb2, operant);
+            else
+            {
+                System.out.println("Error 2:  Invalid values!");
+            }
+        }else result(numb1, numb2, operant);
     } //Находим числа и оператор в выражении
 
     public static void result(char[] numb1, char[] numb2, char operant) //Находим результат введеного выражения

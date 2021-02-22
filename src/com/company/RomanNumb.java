@@ -1,6 +1,60 @@
 package com.company;
 
 public class RomanNumb {
+    private static int prior(char c)
+    {
+
+        if (c == 'I')
+            return 1;
+        if (c == 'V')
+            return 2;
+        if (c == 'X')
+            return 3;
+        if (c == 'L')
+            return 4;
+        if (c == 'C')
+            return 5;
+        if (c == 'D')
+            return 6;
+        if (c == 'M')
+            return 7;
+        return 0;
+    }
+    public  static boolean valid(char[] arr)
+    {
+        int k;
+        int i;
+        boolean flag;
+
+        flag = false;
+        i = 1;
+        k = 1;
+        while (arr[i] != '\0')
+        {
+            if (arr[i] == 'N')
+                flag = true;
+            if (prior(arr[i]) < prior(arr[i - 1]))
+            {
+                i++;
+                k = 0;
+            }
+            else if ((prior(arr[i]) == prior(arr[i - 1])) && k < 3)
+            {
+                i++;
+                k++;
+            }else
+            {
+                if (arr[i - 1] == 'I' && (arr[i] == 'V' || arr[i] == 'X'))
+                    i += 2;
+                else if (arr[i - 1] == 'X' && (arr[i] == 'L' || arr[i] == 'C'))
+                    i += 2;
+                else if (arr[i - 1] == 'C' && (arr[i] == 'D' || arr[i] == 'M'))
+                    i += 2;
+                else return false;
+            }
+        }
+        return !flag || i <= 1;
+    }
     public static char[] IntToRomNub(int numb)  // Преобразуем целое число в римское
     {
         char[] sum= new char[10];

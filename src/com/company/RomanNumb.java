@@ -37,55 +37,41 @@ public class RomanNumb {
         {
             if (arr[i] == 'N')
                 flag = true;
-            try {
-                if ((prior(arr[i]) < prior(arr[i - 1])) && prior(arr[i - 2]) > priormin) {
-                    i++;
+            try{
+                if ((prior(arr[i]) < prior(arr[i - 1])) && prior(arr[i - 2]) > priormin)
+                {
                     priormin = prior(arr[i]);
                     k = 1;
                 }
             }catch (ArrayIndexOutOfBoundsException exc)
             {
                 if (prior(arr[i]) < prior(arr[i - 1]))
-                {
-                    i++;
                     priormin = prior(arr[i]);
-                }
             }
-            if (prior(arr[i]) == prior(arr[i - 1]) && k < 3)
+            if (prior(arr[i]) == prior(arr[i - 1]))
             {
-                if (arr[i] == 'I')
+                if (arr[i] == 'I' && k < 4)
                     k++;
-                i++;
-            }
-            else
+            }else
             {
                 if (arr[i - 1] == 'I' && (arr[i] == 'V' || arr[i] == 'X') && k < 2)
                 {
                     if (i == 1)
-                    {
-                        i++;
                         k++;
-                    }
                     else if (arr[i - 2] != 'V' && arr[i - 2] != 'I')
-                    {
-                        i++;
                         k++;
-                    }else return false;
+                    else return false;
                 }
                 else if (arr[i - 1] == 'X' && (arr[i] == 'L' || arr[i] == 'C') && k < 2)
-                {
-                    i++;
                     k++;
-                }
                 else if (arr[i - 1] == 'C' && (arr[i] == 'D' || arr[i] == 'M') && k < 2)
                 {
                     if (arr[i - 2] != 'X')
-                    {
-                        i++;
                         k++;
-                    }else return false;
+                    else return false;
                 }
             }
+            i++;
         }
         return !flag || i <= 1;
     }
@@ -210,7 +196,7 @@ public class RomanNumb {
             flag = -1;
         if (str[i] == 'N')
             return sum;
-        while (str[i] != '\0')
+        while (i < str.length)
         {
             if (str[i] == 'M')
                 sum += 1000;
@@ -251,17 +237,17 @@ public class RomanNumb {
                 if (str[i + 1] == 'I' && str[i + 2] != 'I')
                 {
                     sum += 6;
-                    i += 2;
+                    i++;
                 }else
                 if (str[i + 1] == 'I' && str[i + 2] == 'I' && str[i + 3] != 'I')
                 {
                     sum += 7;
-                    i += 3;
+                    i += 2;
                 }else
                 if (str[i + 1] == 'I' && str[i + 2] == 'I' && str[i + 3] == 'I')
                 {
                     sum += 8;
-                    i += 4;
+                    i += 3;
                 }else
                     sum += 5;
             }
@@ -270,22 +256,22 @@ public class RomanNumb {
                 if (str[i + 1] == 'I' && str[i + 2] != 'I')
                 {
                     sum += 2;
-                    i += 2;
+                    i++;
                 }else
                 if (str[i + 1] == 'I' && str[i + 2] == 'I')
                 {
                     sum += 3;
-                    i += 3;
+                    i += 2;
                 }else
                 if (str[i + 1] == 'X')
                 {
                     sum += 9;
-                    i += 2;
+                    i++;
                 }else
                 if (str[i + 1] == 'V')
                 {
                     sum += 4;
-                    i += 2;
+                    i++;
                 }else
                     sum += 1;
             }

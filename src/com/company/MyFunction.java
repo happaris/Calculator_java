@@ -179,7 +179,7 @@ public class MyFunction {
                 result(numb1, numb2, operant);
             else
             {
-                System.out.println("Error 2:  Invalid values!");
+                System.out.println("Error 4:  Invalid roman values!");
             }
         }else result(numb1, numb2, operant);
     } //Находим числа и оператор в выражении

@@ -25,18 +25,35 @@ public class RomanNumb {
         int k;
         int i;
         boolean flag;
+        int priormin;
 
         flag = false;
         i = 1;
         k = 1;
+        priormin = 7;
         while (arr[i] != '\0')
         {
             if (arr[i] == 'N')
                 flag = true;
-            if (prior(arr[i]) < prior(arr[i - 1]))
+            try {
+                if ((prior(arr[i]) < prior(arr[i - 1])) && prior(arr[i - 2]) > priormin) {
+                    i++;
+                    priormin = prior(arr[i]);
+                }
+            }catch (ArrayIndexOutOfBoundsException exc)
+            {
+                if (prior(arr[i]) < prior(arr[i - 1]))
+                {
+                    i++;
+                    priormin = prior(arr[i]);
+                }
+            }
+            if (prior(arr[i]) == prior(arr[i - 1]) && k < 3)
+            {
+                if (arr[i] == 'I')
+                    k++;
                 i++;
-            else if (prior(arr[i]) == prior(arr[i - 1]))
-                i++;
+            }
             else
             {
                 if (arr[i - 1] == 'I' && (arr[i] == 'V' || arr[i] == 'X') && k < 2)

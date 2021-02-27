@@ -30,7 +30,9 @@ public class RomanNumb {
         flag = false;
         i = 1;
         k = 1;
-        priormin = 7;
+        priormin = prior(arr[i - 1]);
+        if (arr[i] == '\0')
+            return true;
         while (arr[i] != '\0')
         {
             if (arr[i] == 'N')
@@ -39,6 +41,7 @@ public class RomanNumb {
                 if ((prior(arr[i]) < prior(arr[i - 1])) && prior(arr[i - 2]) > priormin) {
                     i++;
                     priormin = prior(arr[i]);
+                    k = 1;
                 }
             }catch (ArrayIndexOutOfBoundsException exc)
             {
@@ -58,7 +61,12 @@ public class RomanNumb {
             {
                 if (arr[i - 1] == 'I' && (arr[i] == 'V' || arr[i] == 'X') && k < 2)
                 {
-                    if (arr[i - 2] != 'V' && arr[i - 2] != 'I')
+                    if (i == 1)
+                    {
+                        i++;
+                        k++;
+                    }
+                    else if (arr[i - 2] != 'V' && arr[i - 2] != 'I')
                     {
                         i++;
                         k++;
@@ -77,7 +85,6 @@ public class RomanNumb {
                         k++;
                     }else return false;
                 }
-                else return false;
             }
         }
         return !flag || i <= 1;

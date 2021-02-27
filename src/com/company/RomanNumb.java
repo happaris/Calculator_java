@@ -34,25 +34,31 @@ public class RomanNumb {
             if (arr[i] == 'N')
                 flag = true;
             if (prior(arr[i]) < prior(arr[i - 1]))
-                i += 2;
+                i++;
             else if (prior(arr[i]) == prior(arr[i - 1]))
-                i += 2;
+                i++;
             else
             {
                 if (arr[i - 1] == 'I' && (arr[i] == 'V' || arr[i] == 'X') && k < 2)
                 {
-                    i += 2;
-                    k++;
+                    if (arr[i - 2] != 'V' && arr[i - 2] != 'I')
+                    {
+                        i++;
+                        k++;
+                    }else return false;
                 }
                 else if (arr[i - 1] == 'X' && (arr[i] == 'L' || arr[i] == 'C') && k < 2)
                 {
-                    i += 2;
+                    i++;
                     k++;
                 }
                 else if (arr[i - 1] == 'C' && (arr[i] == 'D' || arr[i] == 'M') && k < 2)
                 {
-                    i += 2;
-                    k++;
+                    if (arr[i - 2] != 'X')
+                    {
+                        i++;
+                        k++;
+                    }else return false;
                 }
                 else return false;
             }
@@ -263,5 +269,4 @@ public class RomanNumb {
         }
         return sum * flag;
     }
-
 }

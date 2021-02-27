@@ -237,17 +237,17 @@ public class RomanNumb {
                 if (str[i + 1] == 'I' && str[i + 2] != 'I')
                 {
                     sum += 6;
-                    i++;
+                    i+= 2;
                 }else
                 if (str[i + 1] == 'I' && str[i + 2] == 'I' && str[i + 3] != 'I')
                 {
                     sum += 7;
-                    i += 2;
+                    i += 3;
                 }else
                 if (str[i + 1] == 'I' && str[i + 2] == 'I' && str[i + 3] == 'I')
                 {
                     sum += 8;
-                    i += 3;
+                    i += 4;
                 }else
                     sum += 5;
             }
@@ -256,22 +256,22 @@ public class RomanNumb {
                 if (str[i + 1] == 'I' && str[i + 2] != 'I')
                 {
                     sum += 2;
-                    i++;
+                    i += 2;
                 }else
                 if (str[i + 1] == 'I' && str[i + 2] == 'I')
                 {
                     sum += 3;
-                    i += 2;
+                    i += 3;
                 }else
                 if (str[i + 1] == 'X')
                 {
                     sum += 9;
-                    i++;
+                    i += 2;
                 }else
                 if (str[i + 1] == 'V')
                 {
                     sum += 4;
-                    i++;
+                    i += 2;
                 }else
                     sum += 1;
             }
